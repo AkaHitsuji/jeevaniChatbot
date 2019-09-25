@@ -1,0 +1,23 @@
+{
+  "name": "jeevanichatbot",
+  "version": "1.0.0",
+  "description": "chatbot for Singapore-India Hackathon 2019",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkaHitsuji/jeevaniChatbot.git"
+  },
+  "author": "Ang Yang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AkaHitsuji/jeevaniChatbot/issues"
+  },
+  "homepage": "https://github.com/AkaHitsuji/jeevaniChatbot#readme",
+  "dependencies": {
+    "bot-brother": "^2.1.5",
+    "firebase-admin": "^8.6.0"
+  }
+}
