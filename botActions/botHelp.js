@@ -3,22 +3,22 @@ const { notStartedError, ERROR_MESSAGE, CITIZEN_HELP_MESSAGE } = require('./cons
 
 module.exports = (bot, db) => {
   ///start command
-  bot.command('help').invoke(ctx => {
-    let username = ctx.meta.user.username;
+  bot.command('help', ctx => {
+    let username = ctx.from.username;
     fbFunc
       .checkIfusernameExists(db, username)
       .then((data) => {
         const { chatID, name } = data;
         console.log(data);
         if (typeof chatID === 'number') {
-          return ctx.sendMessage(citizenHelpMessage, {parse_mode: 'Markdown'});
+          return ctx.reply(citizenHelpMessage, {parse_mode: 'Markdown'});
         } else {
-          return ctx.sendMessage(notStartedError(name));
+          return ctx.reply(notStartedError(username));
         }
       })
       .catch(error => {
         console.log(error);
-        ctx.sendMessage(ERROR_MESSAGE);
+        ctx.reply(ERROR_MESSAGE);
       });
   });
 };

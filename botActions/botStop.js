@@ -1,12 +1,12 @@
 const fbFunc = require('../firebaseFunctions');
 
 module.exports = (bot, db) => {
-  bot.command('stop').invoke(function(ctx) {
-    let username = ctx.meta.user.username;
+  bot.command('stop', ctx => {
+    let username = ctx.from.username;
     fbFunc
       .removeChatID(db, username)
       .then(_ => {
-        return ctx.sendMessage(
+        return ctx.reply(
           'You have been unregistered from the bot. Press /start to register again'
         );
       })
