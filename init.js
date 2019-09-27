@@ -1,10 +1,9 @@
 const firebase = require('firebase-admin');
 const Telegraf = require('telegraf');
 
-const config = require('./config/config.json');
-const serviceAccount = require('./config/serviceAccountKey.json');
-
 // comment out when pushing to heroku
+// const config = require('./config/config.json');
+// const serviceAccount = require('./config/serviceAccountKey.json');
 // const { apiKey, databaseURL } = config;
 // firebase.initializeApp({
 //   credential: firebase.credential.cert(serviceAccount),
