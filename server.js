@@ -9,7 +9,9 @@ const {
   botHelp,
   botMedicalRecords,
   botLastVisit,
-  botSendMessage,
+  botAskPermission,
+  botNoCommand,
+  botYesCommand,
 } = require('./botActions');
 
 botStart(bot, db);
@@ -17,6 +19,8 @@ botStop(bot, db);
 botHelp(bot, db);
 botMedicalRecords(bot, db);
 botLastVisit(bot, db);
+botNoCommand(bot, db);
+botYesCommand(bot, db);
 
 bot.on('sticker', ctx => ctx.reply('👍'));
 bot.hears(greetings, ctx => {
@@ -44,13 +48,11 @@ app.get('/', function (req, res) {
 
 // POST method to send message
 app.post('/send', function (req, res) {
-  // console.log(req.body.username);
-  // let username =
   if (req.body.username) {
     let username = req.body.username
     let doctor = req.body.doctor
     let time = req.body.time
-    botSendMessage(bot,db,username,doctor,time)
+    botAskPermission(bot,db,username,doctor,time)
     res.send(req.body.username)
   } else {
     res.send('username does not exist in post request')
