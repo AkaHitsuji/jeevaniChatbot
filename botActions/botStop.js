@@ -3,6 +3,7 @@ const fbFunc = require('../firebaseFunctions');
 module.exports = (bot, db) => {
   bot.command('stop', ctx => {
     let username = ctx.from.username;
+    console.log("botStop called by ",username);
     fbFunc
       .removeChatID(db, username)
       .then(_ => {

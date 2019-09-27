@@ -3,15 +3,14 @@ const {ERROR_MESSAGE} = require('./constants');
 
 
 module.exports = (bot, db) => {
-  ///start command
   bot.command('start', ctx => {
     // Setting data, data is used in text message templates.
     let username = ctx.from.username;
+    console.log("botStart called by ",username);
     fbFunc
       .checkIfusernameExists(db, username)
       .then((data) => {
         const {chatID} = data;
-        console.log(data);
         if (chatID.length === 0) {
           //add chatID into database
           fbFunc

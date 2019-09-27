@@ -10,9 +10,9 @@ const lastVisitData = {
 }
 
 module.exports = (bot, db) => {
-  ///start command
   bot.command('lastvisit', ctx => {
     let username = ctx.from.username;
+    console.log("botLastVisit called by ",username);
     fbFunc
       .checkIfusernameExists(db, username)
       .then((data) => {

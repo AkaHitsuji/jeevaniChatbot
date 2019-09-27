@@ -2,9 +2,9 @@ const fbFunc = require('../firebaseFunctions.js');
 const { notStartedError, ERROR_MESSAGE, CITIZEN_HELP_MESSAGE } = require('./constants');
 
 module.exports = (bot, db) => {
-  ///start command
   bot.command('help', ctx => {
     let username = ctx.from.username;
+    console.log("botHelp called by ",username);
     fbFunc
       .checkIfusernameExists(db, username)
       .then((data) => {

@@ -11,11 +11,9 @@ const medicalData = {
 }
 
 module.exports = (bot, db) => {
-  ///start command
   bot.command('medical', ctx => {
     let username = ctx.from.username;
-    console.log("in medical callback");
-    console.log(username);
+    console.log("botMedicalRecords called by ",username);
     fbFunc
       .checkIfusernameExists(db, username)
       .then((data) => {
@@ -24,7 +22,7 @@ module.exports = (bot, db) => {
         console.log(chatID);
         console.log(typeof(chatID));
         if (typeof chatID === 'number') {
-          return ctx.reply(medicalRecordMessage(name, dateOfBirth, height, weight, bloodType), {parse_mode: 'Markdown'});
+          return ctx.reply(medicalRecordMessage(username, dateOfBirth, height, weight, bloodType), {parse_mode: 'Markdown'});
         } else {
           return ctx.reply(notStartedError(username));
         }
