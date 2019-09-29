@@ -1,14 +1,7 @@
+const axios = require("axios");
+
 const fbFunc = require('../firebaseFunctions.js');
 const { notStartedError, ERROR_MESSAGE, MEDICAL_RECORD_MESSAGE } = require('./constants');
-
-// hardcoded medical data for now
-const medicalData = {
-  "name": "Ang Yang",
-  "dateOfBirth": "03/02/1994",
-  "height": 181,
-  "weight": 80,
-  "bloodType": "O",
-}
 
 module.exports = (bot, db) => {
   bot.command('medical', ctx => {
@@ -18,11 +11,26 @@ module.exports = (bot, db) => {
       .checkIfusernameExists(db, username)
       .then((data) => {
         const {chatID} = data;
-        const {name,dateOfBirth,height,weight,bloodType} = medicalData
         console.log(chatID);
-        console.log(typeof(chatID));
         if (typeof chatID === 'number') {
-          return ctx.reply(medicalRecordMessage(username, dateOfBirth, height, weight, bloodType), {parse_mode: 'Markdown'});
+          const medical_url = "https://jeevani-backend.herokuapp.com/chatbot/"+username+"/medical"
+          getResponse(medical_url)
+            .then((data) => {
+              const name = data.user_data.name
+              const a_ID = data.a_id
+              const dob = data.user_data.dob
+              const gender = data.user_data.gender
+              const height = data.user_data.height
+              const weight = data.user_data.weight
+              const bloodtype = data.user_data.bloodtype
+
+              return ctx.reply(medicalRecordMessage(name, a_ID, dob, gender, height, weight, bloodtype), {parse_mode: 'Markdown'});
+              console.log(username,' has accessed medical records');
+            })
+            .catch(error => {
+              console.log(error);
+              ctx.reply(FAILED_GET_REQ)
+            })
         } else {
           return ctx.reply(notStartedError(username));
         }
@@ -32,6 +40,17 @@ module.exports = (bot, db) => {
         ctx.reply(ERROR_MESSAGE);
       });
   });
+};
+
+const getResponse = async url => {
+  try {
+    const response = await axios.get(url);
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 };
 
 const medicalRecordMessage = MEDICAL_RECORD_MESSAGE;

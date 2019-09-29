@@ -23,7 +23,6 @@ module.exports = (bot, db) => {
               const lastReport = reports[reports.length-1]
               for (key in lastReport.tests) {
                 labReportMessage = labReportMessage + `${key}: *${lastReport.tests[key]}*\n`
-                console.log(key, ": ", lastReport.tests[key]);
               }
               return ctx.reply(labReportMessage, {parse_mode: 'Markdown'});
             })

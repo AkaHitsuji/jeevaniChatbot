@@ -3,10 +3,10 @@ const { notStartedError, ERROR_MESSAGE, LAST_VISIT_MESSAGE } = require('./consta
 
 // hardcoded last visit data for now
 const lastVisitData = {
-  "clinic": "Tata Consultants",
-  "dateOfVisit": "12/09/2019",
-  "medicinePrescribed": "Panadol, Morphine, Ice",
-  "additionalNotes": "take medicine 16 times a day. make a visit in three weeks time",
+  "clinic": "Jeevani GP",
+  "dateOfVisit": "29/09/2019",
+  "medicinePrescribed": "Panadol, Ibuprofen",
+  "additionalNotes": "2 pills 3 times a day after meal",
 }
 
 module.exports = (bot, db) => {

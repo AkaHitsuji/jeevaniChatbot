@@ -9,7 +9,6 @@ module.exports = (bot, db) => {
       .checkIfusernameExists(db, username)
       .then((data) => {
         const { chatID, name } = data;
-        console.log(data);
         if (typeof chatID === 'number') {
           return ctx.reply(citizenHelpMessage, {parse_mode: 'Markdown'});
         } else {
