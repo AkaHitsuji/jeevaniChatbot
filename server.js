@@ -12,6 +12,7 @@ const {
   botAskPermission,
   botNoCommand,
   botYesCommand,
+  botSendMessage
 } = require('./botActions');
 
 botStart(bot, db);
@@ -53,7 +54,20 @@ app.post('/send', function (req, res) {
     let doctor = req.body.doctor
     let time = req.body.time
     botAskPermission(bot,db,username,doctor,time)
-    res.send(req.body.username)
+    res.send('approval message sent to ',req.body.username)
+  } else {
+    res.send('username does not exist in post request')
+  }
+})
+
+// POST method to allow backend to push message
+app.post('/notify', function (req, res) {
+  if (req.body.username) {
+    let username = req.body.username
+    let message = req.body.message
+    // bot send message
+    botSendMessage(bot, db, username, message)
+    res.send('message has been sent to ',req.body.username)
   } else {
     res.send('username does not exist in post request')
   }
