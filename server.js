@@ -12,7 +12,8 @@ const {
   botAskPermission,
   botNoCommand,
   botYesCommand,
-  botSendMessage
+  botSendMessage,
+  botLabReport
 } = require('./botActions');
 
 botStart(bot, db);
@@ -20,6 +21,7 @@ botStop(bot, db);
 botHelp(bot, db);
 botMedicalRecords(bot, db);
 botLastVisit(bot, db);
+botLabReport(bot, db);
 botNoCommand(bot, db);
 botYesCommand(bot, db);
 
